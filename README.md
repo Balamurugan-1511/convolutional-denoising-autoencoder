@@ -5,24 +5,31 @@
 To develop a convolutional autoencoder for image denoising application.
 
 ## Problem Statement and Dataset
+The objective is to build a Convolutional Autoencoder (CAE) to denoise images from the MNIST dataset. The MNIST dataset contains grayscale images of handwritten digits (0-9) in a 28x28 pixel format. The challenge is to:
 
+Add Noise: Introduce random noise to the images, effectively corrupting them.
+Denoise the Images: Train the autoencoder to reconstruct clean images from the noisy input by learning compressed and efficient representations of the image data.
+Evaluate Performance: Compare the original images, noisy images, and the reconstructed (denoised) images to assess the autoencoder’s ability to remove noise.
+The focus is on achieving an efficient encoding-decoding mechanism using convolutional layers, which are particularly well-suited for image data.
 ## Convolution Autoencoder Network Model
 
-Include the neural network model diagram.
+![image](https://github.com/user-attachments/assets/1e68555d-6aec-4cdb-b816-f2c23c8715ab)
+
 
 ## DESIGN STEPS
-
 ### STEP 1:
+Data Preparation: Load MNIST dataset, normalize the pixel values to [0, 1], and reshape the images to (28, 28, 1).
 
 ### STEP 2:
+Add Gaussian noise to the images and clip the values between 0 and 1 to create noisy versions of the dataset
 
 ### STEP 3:
-
+Build a Convolutional Autoencoder with convolutional and pooling layers for encoding, and upsampling layers for decoding to reconstruct clean images from noisy inputs.
 Write your own steps
 
 ## PROGRAM
-### Name:
-### Register Number:
+### Name:Bala murugan P
+### Register Number:212222230017
 
 ```
 from tensorflow import keras
@@ -94,7 +101,7 @@ autoencoder.summary()
 autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
 ```
 ```
-autoencoder.fit(x_train_noisy, x_train_scaled,
+history=autoencoder.fit(x_train_noisy, x_train_scaled,
                 epochs=2,
                 batch_size=128,
                 shuffle=True,
@@ -133,7 +140,17 @@ for i in range(1, n + 1):
     ax.get_yaxis().set_visible(False)
 plt.show()
 ```
-
+```
+plt.figure(figsize=(10, 7))
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.title('Training and Validation Loss vs. Epochs')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+plt.grid()
+plt.show()
+```
 
 ## OUTPUT
 
@@ -146,8 +163,10 @@ plt.show()
 
 ### Training Loss, Validation Loss Vs Iteration Plot
 
-Include a few sample images here.
+![image](https://github.com/user-attachments/assets/7fb81571-dc6e-40e5-9b1b-cd5376bd34ae)
+
 
 
 
 ## RESULT
+The convolutional autoencoder successfully reconstructed noisy MNIST images, effectively reducing noise while preserving key details. Visual comparisons show significant improvement from the noisy input to the denoised output.
